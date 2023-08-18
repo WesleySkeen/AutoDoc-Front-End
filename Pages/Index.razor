@@ -2,11 +2,7 @@
 @using AutoDoc_Front_End.Data
 @inject CodeNarratorService narratorService
 
-<PageTitle>Weather forecast</PageTitle>
-
-<h1>Weather forecast</h1>
-
-<p>This component demonstrates fetching data from a service.</p>
+<PageTitle>Code narrator</PageTitle>
 
 @if (codeNarrations == null)
 {
@@ -14,25 +10,16 @@
 }
 else
 {
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Function Name</th>
-            <th>Description</th>
-            <th>Code</th>
-        </tr>
-        </thead>
-        <tbody>
+    <div id="code-narration-feed">
         @foreach (var codeNarration in codeNarrations)
         {
-            <tr>
-                <td>@codeNarration.FunctionName</td>
-                <td>@codeNarration.Description</td>
-                <td>@codeNarration.Code</td>
-            </tr>
+            <div class="@codeNarration.FunctionName-story story">
+                <h3>@codeNarration.FunctionName</h3>
+                <p>@codeNarration.Description</p>
+                <pre><code>@codeNarration.Code</code></pre>
+            </div>
         }
-        </tbody>
-    </table>
+    </div>
 }
 
 @code {

@@ -1,0 +1,13 @@
+.story{
+    padding: 10px;
+    box-shadow: 0 0 0 1px rgba(230,230,230,0.75);
+    margin-bottom: 10px;
+    background-color: white;
+    border-radius: 4px;
+}
+
+pre {
+    background: #333;
+    color: #fff;
+    padding: 20px;
+}
