@@ -33,5 +33,6 @@ public class InputParametersArray
 public class DocumentItem
 {
     public string mermaid { get; set; }
+    public string mermaidLeftToRight => mermaid.Replace("graph TD;", "graph LR;");
     public List<FunctionArray> function_array { get; set; }
 }

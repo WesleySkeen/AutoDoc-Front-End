@@ -43,3 +43,10 @@
   content: "\2796"; /* Unicode character for "minus" sign (-) */
 }
 
+
+@media (min-width: 641px) {
+    .navbar-toggler {
+        display: none;
+    }
+}
+

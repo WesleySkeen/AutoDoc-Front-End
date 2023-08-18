@@ -13,7 +13,7 @@ public class CodeNarratorService
         var config = new AmazonS3Config { RegionEndpoint = region };
         IAmazonS3 s3Client = new AmazonS3Client(config);
         
-        var result = await GetS3Values(s3Client, "hat-23-hsb","hat-32-hsb-file2.json");
+        var result = await GetS3Values(s3Client, "hat-23-hsb","hat-32-hsb-file-35.json");
 
         return result;
     }
