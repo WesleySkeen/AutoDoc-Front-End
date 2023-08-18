@@ -31,6 +31,18 @@ main {
         overflow: hidden;
         text-overflow: ellipsis;
     }
+    
+    .logo-placeholder {
+        border-width: 2px;
+        border-color: #4682B4;
+        background-color: #E0FFFF;
+        width: 200px;
+        text-align: center;
+        line-height:30px;
+        padding:3px 0;
+    }
+
+    
 
 @media (max-width: 640.98px) {
     .top-row:not(.auth) {
