@@ -6,7 +6,7 @@ namespace AutoDoc_Front_End.Data;
 
 public class CodeNarratorService
 {
-    public async Task<List<DocumentItem>> GetCodeNarrationAsync(DateOnly startDate)
+    public async Task<DocumentItem> GetCodeNarrationAsync(DateOnly startDate)
     {
         
         var region = RegionEndpoint.GetBySystemName("us-west-2");
@@ -17,10 +17,10 @@ public class CodeNarratorService
 
         return result;
     }
-
-    async Task<List<DocumentItem>> GetS3Values(IAmazonS3 client, string bucketName, string objectName)
+    
+    async Task<DocumentItem> GetS3Values(IAmazonS3 client, string bucketName, string objectName)
     {
-        List<DocumentItem>? items = null;
+        DocumentItem? items = null;
 
         using (var stream = await DownloadObjectFromBucketAsync(client, bucketName, objectName))
         using (var reader = new StreamReader(stream))
@@ -28,7 +28,7 @@ public class CodeNarratorService
             var json = await reader.ReadToEndAsync();
             try
             {
-                items = JsonConvert.DeserializeObject<List<DocumentItem>>(json);
+                items = JsonConvert.DeserializeObject<DocumentItem>(json);
             }
             catch (Exception ex)
             {
