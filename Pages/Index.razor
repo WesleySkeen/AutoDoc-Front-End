@@ -21,14 +21,14 @@ else
                 </div>
             </div>
         </div>
-        @foreach (var codeNarration in codeNarrations)
+        @foreach (var codeNarration in codeNarrations.function_array)
         {
-            <div id="@codeNarration.FunctionName-story" class="story">
-                <h3>@codeNarration.FunctionName</h3>
-                <p>@codeNarration.Explanation</p>
+            <div id="@codeNarration.function_name-story" class="story">
+                <h3>@codeNarration.function_name</h3>
+                <p>@codeNarration.functionDecription</p>
                 <button class="accordion">View code</button>
                 <div class="panel">
-                    <pre><code class="language-csharp">@codeNarration.Code</code></pre>
+                    <pre><code class="language-csharp">@codeNarration.original_code</code></pre>
                 </div>
             </div>
         }
@@ -36,7 +36,7 @@ else
 }
 
 @code {
-    private List<DocumentItem>? codeNarrations;
+    private DocumentItem? codeNarrations;
 
     protected override async Task OnInitializedAsync()
     {
