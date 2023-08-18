@@ -13,10 +13,13 @@ else
     <div id="code-narration-feed">
         @foreach (var codeNarration in codeNarrations)
         {
-            <div class="@codeNarration.FunctionName-story story">
+            <div id="@codeNarration.FunctionName-story" class="story">
                 <h3>@codeNarration.FunctionName</h3>
                 <p>@codeNarration.Explanation</p>
-                <pre><code>@codeNarration.Code</code></pre>
+                <button class="accordion">View code</button>
+                <div class="panel">
+                    <pre><code class="language-csharp">@codeNarration.Code</code></pre>
+                </div>
             </div>
         }
     </div>
