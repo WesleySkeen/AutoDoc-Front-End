@@ -15,7 +15,7 @@ else
         {
             <div class="@codeNarration.FunctionName-story story">
                 <h3>@codeNarration.FunctionName</h3>
-                <p>@codeNarration.Description</p>
+                <p>@codeNarration.Explanation</p>
                 <pre><code>@codeNarration.Code</code></pre>
             </div>
         }
@@ -23,7 +23,7 @@ else
 }
 
 @code {
-    private CodeNarration[]? codeNarrations;
+    private List<DocumentItem>? codeNarrations;
 
     protected override async Task OnInitializedAsync()
     {
