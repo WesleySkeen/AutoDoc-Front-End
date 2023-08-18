@@ -14,17 +14,16 @@ public class CodeNarratorService
         var config = new AmazonS3Config { RegionEndpoint = region };
         IAmazonS3 s3Client = new AmazonS3Client(config);
         
-        var result = await GetS3Values(s3Client, "hat-23-hsb","hat-32-hsb-file-35.json");
+        var result = await GetS3Values(s3Client, "hat-23-hsb");
 
         return result;
     }
     
-    async Task<DocumentItem> GetS3Values(IAmazonS3 client, string bucketName, string objectName)
+    async Task<DocumentItem> GetS3Values(IAmazonS3 client, string bucketName)
     {
         DocumentItem? items = null;
 
         var list = await ListS3Values(client, bucketName);
-
         var current = list.S3Objects.MaxBy(m => m.LastModified);
 
         using (var stream = await DownloadObjectFromBucketAsync(client, bucketName, current?.Key))
@@ -46,7 +45,7 @@ public class CodeNarratorService
     
     async Task<ListObjectsResponse> ListS3Values(IAmazonS3 client, string bucketName)
     {
-        var request = new Amazon.S3.Model.ListObjectsRequest
+        var request = new ListObjectsRequest
         {
             BucketName = bucketName
         };
