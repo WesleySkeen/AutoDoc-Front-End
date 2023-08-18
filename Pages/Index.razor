@@ -11,6 +11,16 @@
 else
 {
     <div id="code-narration-feed">
+        <div class="story">
+            <button class="accordion">View code diagram</button>
+            <div class="panel">
+                @* <pre><code class="language-csharp">popopo</code></pre> *@
+                <div class='mermaid'>
+                    graph TD; AddTwoNumbers--> DoSomething; DoSomething --> GetNthFibonacci_Ite;
+                    DoSomethingElse --> GetNthFibonacci_Ite; GetNthFibonacci_Ite-->DoSomethingElse
+                </div>
+            </div>
+        </div>
         @foreach (var codeNarration in codeNarrations)
         {
             <div id="@codeNarration.FunctionName-story" class="story">
