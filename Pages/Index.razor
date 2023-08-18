@@ -1,9 +1,45 @@
 ﻿@page "/"
+@using AutoDoc_Front_End.Data
+@inject CodeNarratorService narratorService
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Weather forecast</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>Weather forecast</h1>
 
-Welcome to your new app.
+<p>This component demonstrates fetching data from a service.</p>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+@if (codeNarrations == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Function Name</th>
+            <th>Description</th>
+            <th>Code</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var codeNarration in codeNarrations)
+        {
+            <tr>
+                <td>@codeNarration.FunctionName</td>
+                <td>@codeNarration.Description</td>
+                <td>@codeNarration.Code</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+    private CodeNarration[]? codeNarrations;
+
+    protected override async Task OnInitializedAsync()
+    {
+        codeNarrations = await narratorService.GetCodeNarrationAsync(DateOnly.FromDateTime(DateTime.Now));
+    }
+}
