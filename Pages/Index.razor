@@ -16,7 +16,10 @@ else
             <div class="@codeNarration.FunctionName-story story">
                 <h3>@codeNarration.FunctionName</h3>
                 <p>@codeNarration.Explanation</p>
-                <pre><code>@codeNarration.Code</code></pre>
+                <button class="accordion">View code</button>
+                <div class="panel">
+                    <pre><code class="language-csharp">@codeNarration.Code</code></pre>
+                </div>
             </div>
         }
     </div>
