@@ -25,7 +25,12 @@ else
         {
             <div id="@codeNarration.function_name-story" class="story">
                 <h3>@codeNarration.function_name</h3>
-                <p>@((MarkupString)Regex.Replace(HttpUtility.HtmlEncode(codeNarration.functionDecription), "\n", "<br />"))</p>
+                <ul >
+                    @foreach (var explanation_step in codeNarration.explanation_steps_array)
+                    {
+                        <li >@explanation_step</li>
+                    }
+                </ul>
                 <button class="accordion">View code</button>
                 <div class="panel">
                     <pre><code class="language-csharp">@codeNarration.original_code</code></pre>
