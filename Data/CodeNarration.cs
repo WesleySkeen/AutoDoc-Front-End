@@ -16,7 +16,7 @@ public class FunctionArray
     private string JoinDescription(){
         
         var sb = new StringBuilder();
-        explanation_steps_array.ForEach(s => sb.Append(s + "<br/>"));       
+        explanation_steps_array.ForEach(s => sb.Append(s + "\n"));       
         var combinedList = sb.ToString();
         return HttpUtility.HtmlEncode(@combinedList);
     }

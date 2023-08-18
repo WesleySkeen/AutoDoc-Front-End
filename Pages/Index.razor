@@ -1,5 +1,7 @@
 ﻿@page "/"
 @using AutoDoc_Front_End.Data
+@using System.Text.RegularExpressions
+@using System.Web
 @inject CodeNarratorService narratorService
 
 <PageTitle>Code narrator</PageTitle>
@@ -14,10 +16,8 @@ else
         <div class="story">
             <button class="accordion" id="view-code-diagram-btn">View code diagram</button>
             <div class="panel">
-                @* <pre><code class="language-csharp">popopo</code></pre> *@
                 <div class='mermaid'>
-                    graph TD; AddTwoNumbers--> DoSomething; DoSomething --> GetNthFibonacci_Ite;
-                    DoSomethingElse --> GetNthFibonacci_Ite; GetNthFibonacci_Ite-->DoSomethingElse
+                    @codeNarrations.mermaid
                 </div>
             </div>
         </div>
@@ -25,7 +25,7 @@ else
         {
             <div id="@codeNarration.function_name-story" class="story">
                 <h3>@codeNarration.function_name</h3>
-                <p>@codeNarration.functionDecription</p>
+                <p>@((MarkupString)Regex.Replace(HttpUtility.HtmlEncode(codeNarration.functionDecription), "\n", "<br />"))</p>
                 <button class="accordion">View code</button>
                 <div class="panel">
                     <pre><code class="language-csharp">@codeNarration.original_code</code></pre>
