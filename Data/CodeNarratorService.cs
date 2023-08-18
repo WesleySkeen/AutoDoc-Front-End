@@ -1,5 +1,6 @@
 using Amazon;
 using Amazon.S3;
+using Amazon.S3.Model;
 using Newtonsoft.Json;
 
 namespace AutoDoc_Front_End.Data;
@@ -22,7 +23,11 @@ public class CodeNarratorService
     {
         DocumentItem? items = null;
 
-        using (var stream = await DownloadObjectFromBucketAsync(client, bucketName, objectName))
+        var list = await ListS3Values(client, bucketName);
+
+        var current = list.S3Objects.MaxBy(m => m.LastModified);
+
+        using (var stream = await DownloadObjectFromBucketAsync(client, bucketName, current?.Key))
         using (var reader = new StreamReader(stream))
         {
             var json = await reader.ReadToEndAsync();
@@ -37,6 +42,17 @@ public class CodeNarratorService
         }
 
         return items;
+    }
+    
+    async Task<ListObjectsResponse> ListS3Values(IAmazonS3 client, string bucketName)
+    {
+        var request = new Amazon.S3.Model.ListObjectsRequest
+        {
+            BucketName = bucketName
+        };
+        var response = await client.ListObjectsAsync(request);
+
+        return response;
     }
     
     async Task<Stream> DownloadObjectFromBucketAsync(IAmazonS3 client, string bucketName, string objectName)
